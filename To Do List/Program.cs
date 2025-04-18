@@ -1,85 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ToDoListApp
+namespace To_Do_List
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("===== Welcome to the To-Do List App =====\n");
 
-            List<string> tasks = new List<string>();
-            string input = "";
+            Console.WriteLine("Welcome to To Do list program.");
+            List<string> taskList = new List<string>();
+            string option = "";
 
-            while (input != "e")
+            while (option != "e")
             {
-                Console.WriteLine("\nWhat would you like to do?");
-                Console.WriteLine("[1] Add Task");
-                Console.WriteLine("[2] Remove Task");
-                Console.WriteLine("[3] View Tasks");
-                Console.WriteLine("[e] Exit");
-                Console.Write("Enter your choice: ");
-                input = Console.ReadLine()?.ToLower();
+                Console.WriteLine("---------------------------------------------------------------");
+                Console.WriteLine("What would you like to do?");
+                Console.WriteLine("Enter 1 to add a task to the list.");
+                Console.WriteLine("Enter 2 to remove a task from the list.");
+                Console.WriteLine("Enter 3 to view the list.");
+                Console.WriteLine("Enter e to exit the program");
 
-                switch (input)
+                option = Console.ReadLine();
+
+                if (option == "1")
                 {
-                    case "1":
-                        Console.Write("Enter a new task: ");
-                        string newTask = Console.ReadLine();
-                        tasks.Add(newTask);
-                        Console.WriteLine("✅ Task added!");
-                        break;
 
-                    case "2":
-                        if (tasks.Count == 0)
-                        {
-                            Console.WriteLine("⚠ No tasks to remove.");
-                            break;
-                        }
-
-                        Console.WriteLine("Here are your current tasks:");
-                        for (int i = 0; i < tasks.Count; i++)
-                        {
-                            Console.WriteLine($"[{i}] {tasks[i]}");
-                        }
-
-                        Console.Write("Enter the task number to remove: ");
-                        if (int.TryParse(Console.ReadLine(), out int index) && index >= 0 && index < tasks.Count)
-                        {
-                            Console.WriteLine($"🗑 Removed: {tasks[index]}");
-                            tasks.RemoveAt(index);
-                        }
-                        else
-                        {
-                            Console.WriteLine("❌ Invalid index.");
-                        }
-                        break;
-
-                    case "3":
-                        Console.WriteLine("📝 Your Tasks:");
-                        if (tasks.Count == 0)
-                        {
-                            Console.WriteLine("No tasks yet!");
-                        }
-                        else
-                        {
-                            foreach (var task in tasks)
-                            {
-                                Console.WriteLine($"- {task}");
-                            }
-                        }
-                        break;
-
-                    case "e":
-                        Console.WriteLine("👋 Exiting... Goodbye!");
-                        break;
-
-                    default:
-                        Console.WriteLine("❌ Invalid choice. Please try again.");
-                        break;
+                    Console.WriteLine("Enter the Task name to add in the list: ");
+                    string task = Console.ReadLine();
+                    taskList.Add(task);
+                    Console.WriteLine("Task added to the list.");
                 }
+
+                else if (option == "2")
+                {
+                    for (int i = 0; i < taskList.Count; i++)
+                    {
+                        Console.WriteLine(i + " : " + taskList[i]);
+                    }
+
+                    Console.WriteLine("Please enter the Number Beside of your task that you want to remove.");
+                    int taskNumber = Convert.ToInt32(Console.ReadLine());
+                    taskList.RemoveAt(taskNumber);
+
+                }
+
+                else if (option == "3")
+                {
+                    Console.WriteLine("Current Task in the List : ");
+
+                    for (int i = 0; i < taskList.Count; i++)
+                    {
+                        Console.WriteLine(taskList[i]);
+                    }
+                }
+
+                else if (option == "e")
+                {
+                    Console.WriteLine("Exiting Program...");
+                }
+
+                else
+                {
+                    Console.WriteLine("Invalid Input! Please enter Correct input.");
+                }
+
+                Console.WriteLine("Thanks for Using the Program.");
+
+
             }
+
+
         }
     }
 }
